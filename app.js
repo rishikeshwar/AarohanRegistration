@@ -1,3 +1,4 @@
+
 var express = require("express"),
     app = express(),
     path = __dirname + '/views/',
@@ -31,14 +32,31 @@ var selectoption = {
     choice: 1
 };
 
+var eventdetails = {
+    name: null,
+    category: null 
+}
+
 
 
 firebase.initializeApp(config);
 var database = firebase.database();
 
 var ref = database.ref("Schools/");
+schools = new Array();
+ref.once("value").then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+  // key will be "ada" the first time and "alan" the second time
+            var key = childSnapshot.key;
+  // childData will be the actual contents of the child
+            var childData = childSnapshot.val();
+            schools.push(key);
+        });
+});
 
-var schools = [];
+
+
+
 var i = 0;
 
 
@@ -74,57 +92,59 @@ app.get("/student_reg", function(req, res){
     console.log("student_reg");
     selectoption.choice = 2;
     studentdetails = {
-        schoolname: null,
-        facultyname: null,
-        facultyemail: null,
-        facultyphonono: null    
+          id: null,
+          name: null,
+          school: null,
+          category: null,
+          gender: null
     };
-    schools = new Array();
-    ref.once("value").then(function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-      // key will be "ada" the first time and "alan" the second time
-                var key = childSnapshot.key;
-      // childData will be the actual contents of the child
-                var childData = childSnapshot.val();
-                schools.push(key);
-            });
-    });
+
     res.redirect('/');
 });
 
 app.get("/event_reg", function(req, res){
     selectoption.choice = 3;
     eventdetails = {
-        schoolname: null,
-        facultyname: null,
-        facultyemail: null,
-        facultyphonono: null
+        name: null,
+        category: null
     };
     res.redirect('/');
 });
 
 app.post("/reg_school", function(req, res) {
-	schooldetails = {
+  schooldetails = {
         schoolname: req.body.school_name,
         facultyname: req.body.faculty_name,
         facultyemail: req.body.faculty_email,
         facultyphonono: req.body.faculty_phoneno
     };
-    console.log(schooldetails)
+    console.log(schooldetails);
+    schools.push(schooldetails);
     writeSchoolData()
     res.redirect('/');
 });
 
 app.post("/reg_student", function(req, res) {
-	studentdetails = {
+  studentdetails = {
         id: req.body.uid,
         name: req.body.name,
         category: req.body.category,
         gender: req.body.gender,
         school: req.body.school
     };
-    console.log(studentdetails)
+    console.log(studentdetails +'this one');
     writeStudentData();
+    res.redirect('/');
+});
+
+app.post("/reg_event", function(req, res){
+    selectoption.choice = 3;
+    eventdetails = {
+        name: req.body.name,
+        category: req.body.category
+    };
+    console.log(eventdetails);
+    writeEventdata();
     res.redirect('/');
 });
 
@@ -151,12 +171,30 @@ function writeSchoolData() {
 
 
 function writeStudentData() {
+  
+  firebase.database().ref('Students/'+ studentdetails.id).set({
+        stdname: studentdetails.name,
+        category: studentdetails.category,
+        gender: studentdetails.gender,
+        school: studentdetails.school
+  });
+  var id = studentdetails.id;
+  var Students = { };
+  Students[id] = true;
+  firebase.database().ref('Schools/' + studentdetails.school).set( {
+    Students
+  });
+}
 
+function writeEventdata() {
+
+  firebase.database().ref('Events/'+ eventdetails.name).set({
+        Category: eventdetails.category
+  });
 }
 
 function readSchoolData() {
     schools = [];
-    schools.push("Rishi");
     
     
     console.log(schools.length);

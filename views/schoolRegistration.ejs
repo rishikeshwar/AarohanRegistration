@@ -5,7 +5,8 @@
 <div class="container">  
   <form id="contact" action="/reg_school" method="post">
       <h3><b>School Registration</b></h3>
-    <h4>Contact us today, and get reply with in 24 hours!<br> <% if (schooldetails.schoolname) {%> <h2><%= schooldetails.schoolname %></h2> <% } %></h4>
+    <h4><br> <% if (schooldetails.schoolname) {%>
+    <%= schooldetails.schoolname %> Registered <% } %> </h4>
     <fieldset>
       <input placeholder="School Name" type="text" tabindex="1" required autofocus name="school_name">
     </fieldset>
