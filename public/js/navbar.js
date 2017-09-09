@@ -9,7 +9,7 @@ $(document).ready(function(){
 			$("body").css("overflow-x","hidden");
 			$("#primary_nav").css("overflow-y","hidden");
 		}else{
-			$("#primary_nav").animate({left: "-115px"}, 200);
+			$("#primary_nav").animate({left: "-145px"}, 200);
 			$("#wrapper_main_content").animate({left: "0px"}, 200);
 			$("#wrapper_main_content").css("overflow-y","hidden");
 			$("body").css("overflow-x","hidden");

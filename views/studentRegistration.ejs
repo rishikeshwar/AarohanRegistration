@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div class="container">  
+  <form id="contact" action="/reg_student" method="post">
+      <h3><b>Student Registration</b></h3>
+    <h4>Contact us today, and get reply with in 24 hours!<br></h4>
+    <fieldset>
+      <input placeholder="Aarohan Id" type="text" tabindex="1" required autofocus name="uid">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Faculty Name" type="text" tabindex="2" required name="faculty_name">
+    </fieldset>
+    <fieldset>
+    <select>
+        <option value="" disabled selected>Gender</option> 
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+    </fieldset>
+    <fieldset>
+    <select>
+        <option value="" disabled selected>Category</option> 
+        <option>Junior</option>
+        <option>Senior</option>
+    </select>
+    </fieldset>
+    <fieldset>
+    <h1>coming</h1>
+        <h1><%= Object.keys(schools).length %></h1>
+    <select>
+        <option value="" disabled selected>School</option> 
+        
+        <% for(var i=0;i<Object.keys(schools).length;i++) { %>
+        <option><%= schools[i] %></option>
+        <% }%>
+        <option>Female</option>
+    </select>
+    
+    </fieldset>
+  </form>
+ 
+  
+</div>
+
+</body>
+</html>
