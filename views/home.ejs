@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aarohan  Registration</title>
+  <link rel="stylesheet" href="./css/home.css">
+</head>
+<body>
+<nav id="primary_nav">
+<a href="#" id="mobile_nav">&#9776;</a>
+    <ul>
+      <li><a href="#">School<br>Registration</a></li>
+            <li><a href="#">Student<br>Registaration</a></li>
+            <li><a href="#">Event<br>Registration</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+<div class="container">  
+  <form id="contact" action="/reg_school" method="post">
+    <h3>School Registration</h3>
+    <h4>Contact us today, and get reply with in 24 hours!<br> <% if (schooldetails.schoolname) {%> <h2><%= schooldetails.schoolname %></h2> <% } %></h4>
+    <fieldset>
+      <input placeholder="School Name" type="text" tabindex="1" required autofocus name="school_name">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Faculty Name" type="text" tabindex="2" required name="faculty_name">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Faculty Email Id" type="email" tabindex="3" required name="faculty_email">
+    </fieldset>
+    <fieldset>
+      <input placeholder="Faculty Phone Number" type="tel" tabindex="3" required name="faculty_phoneno">
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit" data-submit="...Sending" >Submit</button>
+    </fieldset>
+  </form>
+ 
+  
+</div>
+
+<!-- scripts -->
+<script type="text/JavaScript" src="/js/jquery.min.js" ></script>
+<script src="/js/navbar.js"></script>
+
+</body>
+</html>
